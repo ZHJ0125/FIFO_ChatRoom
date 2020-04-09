@@ -14,7 +14,7 @@
 * 进阶功能
 1. 利用QT结合Linux编写图形界面 😛
 
-![QT客户端预期图](https://github.com/ZHJ0125/FIFO_ChatRoom/blob/master/Data/Image/Client_QT_Demo.png)
+![QT客户端预期图](../Image/Client_QT_Demo.png)
 
 2. 实现图形界面的登陆功能
 
