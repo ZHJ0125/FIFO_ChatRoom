@@ -12,6 +12,8 @@
 
 int main(){
 
+    pid_t pid;
+
     /* Initial handshake message */
     Client_to_Server.client_pid = getpid();
     strcpy(Client_to_Server.message, IS_NEW_CLIENT);
@@ -22,14 +24,33 @@ int main(){
     Client_to_Server.client_pid, Client_to_Server.message);
 
     /* Client handshake with server, make a communication link */
-    Send_and_Recive_Message();
+    Client_Write_Data(!IS_PARENT, -1);
+    Client_Read_Data();
 
     /* Keep communication */
-    while(1){
-        printf("Please input message: ");
-        fgets(Client_to_Server.message, 60, stdin);
-        Client_to_Server.client_pid = getpid();
-        Send_and_Recive_Message();
+    if((pid = fork()) < 0){
+        printf("Fail to call fork()\n");
+        exit(1);
+    }
+    else if(pid > 0){
+        while(1){
+            // printf("Please input message: ");
+            fgets(Client_to_Server.message, 60, stdin);
+            Client_to_Server.client_pid = getpid();
+            Private_Chat_Filter(Client_to_Server.message);
+            Client_Write_Data(IS_PARENT, pid);
+        }
+    }
+    else{
+        while(1){
+            /* Read server struct data */
+            if((PrivateFd = open(Private_FIFO_Name, O_RDONLY)) > 0){
+                if(read(PrivateFd, &Server_to_Client, sizeof(struct FIFO_Data)) > 0){
+                    printf("Recive from Server: 👇\n%s\n", Server_to_Client.message);
+                    close(PrivateFd);
+                }
+            }
+        }
     }
 
 }
