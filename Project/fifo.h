@@ -22,13 +22,17 @@
 #define PRIVATE_FIFO "Client_FIFO_"
 #define IS_NEW_CLIENT "handshake\n"
 #define CLIENT_QUIT "quit\n"
+#define BROADCAST_TO_ALL "Broadcast"
 #define PRIVATE_MSG_HEADER "to:"
 #define MAX_Client_Number 5
 #define IS_PARENT 1
+#define MAX_CLIENT_NAME_LEN 30
 
 struct FIFO_Data{
     int client_pid;
-    int private_pid;
+    char client_name[MAX_CLIENT_NAME_LEN];
+    char target_name[MAX_CLIENT_NAME_LEN];
+    // int private_pid;
     char message[100];
 };
 
@@ -39,11 +43,14 @@ void Store_Private_FIFO_Name(void);
 void Server_Send_Message(void);
 void Client_Write_Data(int Process, int Child_PID);
 void Client_Read_Data(void);
-void Private_Chat_Filter(char* Client_Message);
+// void Private_Chat_Filter(char* Client_Message);
+void Private_Chat_Filter_By_Name(char* Client_Message);
+// void Store_Client_Name(void);
 
 // int New_Client_Flag;
 int Client_Number;
 int Client_PID_Box[MAX_Client_Number];
+char Client_Name_Box[MAX_Client_Number][MAX_CLIENT_NAME_LEN];
 int PublicFd, PrivateFd;
 char Private_Name[20];
 char* Private_FIFO_Name;

@@ -15,8 +15,12 @@ int main(){
     pid_t pid;
 
     /* Initial handshake message */
+    printf("Please input your name: ");
+    scanf("%s", Client_to_Server.client_name);
+    getchar();
     Client_to_Server.client_pid = getpid();
     strcpy(Client_to_Server.message, IS_NEW_CLIENT);
+    strcpy(Client_to_Server.target_name, BROADCAST_TO_ALL);
 
     /* Get private FIFO name */
     Private_FIFO_Name = Get_Private_FIFO_Name(getpid());
@@ -37,19 +41,14 @@ int main(){
             // printf("Please input message: ");
             fgets(Client_to_Server.message, 60, stdin);
             Client_to_Server.client_pid = getpid();
-            Private_Chat_Filter(Client_to_Server.message);
+            Private_Chat_Filter_By_Name(Client_to_Server.message);
             Client_Write_Data(IS_PARENT, pid);
         }
     }
     else{
         while(1){
             /* Read server struct data */
-            if((PrivateFd = open(Private_FIFO_Name, O_RDONLY)) > 0){
-                if(read(PrivateFd, &Server_to_Client, sizeof(struct FIFO_Data)) > 0){
-                    printf("Recive from Server: 👇\n%s\n", Server_to_Client.message);
-                    close(PrivateFd);
-                }
-            }
+            Client_Read_Data();
         }
     }
 

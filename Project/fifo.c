@@ -71,6 +71,7 @@ void Store_Private_FIFO_Name(void){
     //Client_Number ++;
     //strcpy(Private_FIFO_Box[Client_Number], Private_FIFO_Name);
     Client_PID_Box[Client_Number] = Client_to_Server.client_pid;
+    strcpy(Client_Name_Box[Client_Number], Client_to_Server.client_name);
     printf("The %d has been recorded\n", Client_PID_Box[Client_Number]);
     Client_Number ++;
     printf("Client Number is : %d\n", Client_Number);
@@ -79,16 +80,30 @@ void Store_Private_FIFO_Name(void){
 void Server_Send_Message(void){
 
     int count;
+    int target_count;
+    int source_count;
+
+    printf("Client Target is: %s\n", Client_to_Server.target_name);
 
     /* Private message */
-    if(Client_to_Server.private_pid > 0){
-        printf("Private FIFO Name : %s\n", Get_Private_FIFO_Name(Client_to_Server.private_pid));
-        if((PrivateFd = open(Get_Private_FIFO_Name(Client_to_Server.private_pid), O_WRONLY)) > 0){
+    if(strcmp(Client_to_Server.target_name, BROADCAST_TO_ALL) != 0){
+
+        for(target_count = 0; target_count < Client_Number; target_count ++){
+            if(strcmp(Client_to_Server.target_name, Client_Name_Box[target_count]) == 0)
+            break;
+        }
+        for(source_count = 0; source_count < Client_Number; source_count ++){
+            if(Client_to_Server.client_pid == Client_PID_Box[source_count])
+            break;
+        }
+
+        printf("Private FIFO Name : %s\n", Get_Private_FIFO_Name(Client_PID_Box[target_count]));
+        if((PrivateFd = open(Get_Private_FIFO_Name(Client_PID_Box[target_count]), O_WRONLY)) > 0){
             Server_to_Client.client_pid = Client_to_Server.client_pid;
-            sprintf(Server_to_Client.message, "Client_%d said to you : ", Client_to_Server.client_pid);
+            sprintf(Server_to_Client.message, "%s said to you : ", Client_Name_Box[source_count]);
             strcat(Server_to_Client.message, Client_to_Server.message);
             if(write(PrivateFd, &Server_to_Client, sizeof(struct FIFO_Data)) > 0){
-                printf("Write message to Client_%d Success!\n", Client_to_Server.private_pid);
+                printf("Write message to Client_%d Success!\n", Client_PID_Box[target_count]);
                 close(PrivateFd);
             }
         }
@@ -102,7 +117,7 @@ void Server_Send_Message(void){
             // }
             if((PrivateFd = open(Get_Private_FIFO_Name(Client_PID_Box[count]), O_WRONLY)) > 0){
                 Server_to_Client.client_pid = Client_to_Server.client_pid;
-                sprintf(Server_to_Client.message, "Client_%d said : ", Client_to_Server.client_pid);
+                sprintf(Server_to_Client.message, "%s said : ", Client_to_Server.client_name);
                 strcat(Server_to_Client.message, Client_to_Server.message);
                 if(write(PrivateFd, &Server_to_Client, sizeof(struct FIFO_Data)) > 0){
                     printf("Write message to Client_%d Success!\n", Client_PID_Box[count]);
@@ -166,15 +181,60 @@ void Client_Read_Data(void){
     }
 }
 
-void Private_Chat_Filter(char* Client_Message){
+// void Private_Chat_Filter(char* Client_Message){
+
+//     int offset;
+//     int pid_num;
+//     int count = 0;      // Control PID length
+//     char buffer[2] = {0};
+//     char pid_num_string[5] = {0};
+
+//     // printf("Client Message : %s\n", Client_Message);
+
+//     if(strncmp(Client_Message, PRIVATE_MSG_HEADER, strlen(PRIVATE_MSG_HEADER)) == 0){
+//         offset = strlen(PRIVATE_MSG_HEADER);
+//         /* Filter spaces of client pid */
+//         while(*(Client_Message + offset) == ' '){
+//             offset += 1;
+//         }
+//         while((offset < strlen(Client_Message)) && (count < 5)){
+//             // printf("%c\n", *(Client_Message + offset));
+//             // printf("Entry while\n");
+//             if((*(Client_Message + offset) >= '0') && (*(Client_Message + offset) <= '9')){
+//                 sprintf(buffer, "%c", *(Client_Message + offset));
+//                 strcat(pid_num_string, buffer);
+//                 offset ++;
+//                 count ++;
+//             }
+//             else{
+//                 break;
+//             }
+//         }
+//         /* Filter spaces in messages */
+//         while(*(Client_Message + offset) == ' '){
+//             offset += 1;
+//         }
+//         // printf("pid_num_string is : %s\n", pid_num_string);
+//         pid_num = atoi(pid_num_string);
+//         printf("Private send to client_%d\n", pid_num);
+//         printf("Private Message : %s\n", (Client_Message + offset));
+
+//         /* Intercept valid data of private messages */
+//         strcpy(Client_to_Server.message, (Client_Message + offset));
+//     }
+//     else{
+//         printf("Send mseeage to all clients\n");
+//         pid_num = -1;
+//     }
+//     Client_to_Server.private_pid = pid_num;
+
+// }
+
+void Private_Chat_Filter_By_Name(char* Client_Message){
 
     int offset;
-    int pid_num;
-    int count = 0;      // Control PID length
-    char buffer[2] = {0};
-    char pid_num_string[5] = {0};
-
-    // printf("Client Message : %s\n", Client_Message);
+    char buffer[2];
+    char client_name_buffer[MAX_CLIENT_NAME_LEN] = {0};
 
     if(strncmp(Client_Message, PRIVATE_MSG_HEADER, strlen(PRIVATE_MSG_HEADER)) == 0){
         offset = strlen(PRIVATE_MSG_HEADER);
@@ -182,35 +242,21 @@ void Private_Chat_Filter(char* Client_Message){
         while(*(Client_Message + offset) == ' '){
             offset += 1;
         }
-        while((offset < strlen(Client_Message)) && (count < 5)){
-            // printf("%c\n", *(Client_Message + offset));
-            // printf("Entry while\n");
-            if((*(Client_Message + offset) >= '0') && (*(Client_Message + offset) <= '9')){
-                sprintf(buffer, "%c", *(Client_Message + offset));
-                strcat(pid_num_string, buffer);
-                offset ++;
-                count ++;
-            }
-            else{
-                break;
-            }
+        while(offset < strlen(Client_Message) && (*(Client_Message + offset) != ' ')){
+            sprintf(buffer, "%c", *(Client_Message + offset));
+            strcat(client_name_buffer, buffer);
+            offset ++;
         }
-        /* Filter spaces in messages */
+        /* Filter spaces of client message */
         while(*(Client_Message + offset) == ' '){
             offset += 1;
         }
-        // printf("pid_num_string is : %s\n", pid_num_string);
-        pid_num = atoi(pid_num_string);
-        printf("Private send to client_%d\n", pid_num);
-        printf("Private Message : %s\n", (Client_Message + offset));
-
-        /* Intercept valid data of private messages */
         strcpy(Client_to_Server.message, (Client_Message + offset));
+        strcpy(Client_to_Server.target_name, client_name_buffer);
     }
     else{
-        printf("Send mseeage to all clients\n");
-        pid_num = -1;
+        printf("BROADCAST_TO_ALL\n");
+        strcpy(Client_to_Server.target_name, BROADCAST_TO_ALL);
+        strcpy(Client_to_Server.message, Client_Message);
     }
-    Client_to_Server.private_pid = pid_num;
-
 }
