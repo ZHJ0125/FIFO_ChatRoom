@@ -68,8 +68,7 @@ void sigcatch(int num){
 }
 
 void Store_Private_FIFO_Name(void){
-    //Client_Number ++;
-    //strcpy(Private_FIFO_Box[Client_Number], Private_FIFO_Name);
+
     Client_PID_Box[Client_Number] = Client_to_Server.client_pid;
     strcpy(Client_Name_Box[Client_Number], Client_to_Server.client_name);
     printf("The %d has been recorded\n", Client_PID_Box[Client_Number]);
@@ -100,7 +99,7 @@ void Server_Send_Message(void){
         printf("Private FIFO Name : %s\n", Get_Private_FIFO_Name(Client_PID_Box[target_count]));
         if((PrivateFd = open(Get_Private_FIFO_Name(Client_PID_Box[target_count]), O_WRONLY)) > 0){
             Server_to_Client.client_pid = Client_to_Server.client_pid;
-            sprintf(Server_to_Client.message, "%s said to you : ", Client_Name_Box[source_count]);
+            sprintf(Server_to_Client.message, "[%s] said to you : ", Client_Name_Box[source_count]);
             strcat(Server_to_Client.message, Client_to_Server.message);
             if(write(PrivateFd, &Server_to_Client, sizeof(struct FIFO_Data)) > 0){
                 printf("Write message to Client_%d Success!\n", Client_PID_Box[target_count]);
@@ -108,8 +107,18 @@ void Server_Send_Message(void){
             }
         }
     }
+
     /* Public message */
     else{
+
+        if(New_Client_Flag){
+            sprintf(Server_to_Client.message, "👦 [%s] 进入聊天室 \n", Client_to_Server.client_name);
+        }
+        else{
+            sprintf(Server_to_Client.message, "[%s] said: ", Client_to_Server.client_name);
+            strcat(Server_to_Client.message, Client_to_Server.message);
+        }
+
         for(count = 0; count < Client_Number; count ++){
             /* Skip the data sent by the client */
             // if((Client_PID_Box[count] == Client_to_Server.client_pid) && !New_Client_Flag){
@@ -117,8 +126,6 @@ void Server_Send_Message(void){
             // }
             if((PrivateFd = open(Get_Private_FIFO_Name(Client_PID_Box[count]), O_WRONLY)) > 0){
                 Server_to_Client.client_pid = Client_to_Server.client_pid;
-                sprintf(Server_to_Client.message, "%s said : ", Client_to_Server.client_name);
-                strcat(Server_to_Client.message, Client_to_Server.message);
                 if(write(PrivateFd, &Server_to_Client, sizeof(struct FIFO_Data)) > 0){
                     printf("Write message to Client_%d Success!\n", Client_PID_Box[count]);
                     close(PrivateFd);
@@ -126,7 +133,7 @@ void Server_Send_Message(void){
             }
             usleep(100000);
         }
-        // New_Client_Flag = 0;
+        New_Client_Flag = 0;
     }
     
     printf("\n");
@@ -171,7 +178,8 @@ void Client_Read_Data(void){
     /* Read server struct data */
     if((PrivateFd = open(Private_FIFO_Name, O_RDONLY)) > 0){
         if(read(PrivateFd, &Server_to_Client, sizeof(struct FIFO_Data)) > 0){
-            printf("Recive from Server: 👇\n%s\n", Server_to_Client.message);
+            Show_Local_Time();
+            printf("%s\n", Server_to_Client.message);
             close(PrivateFd);
         }
     }
@@ -181,55 +189,6 @@ void Client_Read_Data(void){
     }
 }
 
-// void Private_Chat_Filter(char* Client_Message){
-
-//     int offset;
-//     int pid_num;
-//     int count = 0;      // Control PID length
-//     char buffer[2] = {0};
-//     char pid_num_string[5] = {0};
-
-//     // printf("Client Message : %s\n", Client_Message);
-
-//     if(strncmp(Client_Message, PRIVATE_MSG_HEADER, strlen(PRIVATE_MSG_HEADER)) == 0){
-//         offset = strlen(PRIVATE_MSG_HEADER);
-//         /* Filter spaces of client pid */
-//         while(*(Client_Message + offset) == ' '){
-//             offset += 1;
-//         }
-//         while((offset < strlen(Client_Message)) && (count < 5)){
-//             // printf("%c\n", *(Client_Message + offset));
-//             // printf("Entry while\n");
-//             if((*(Client_Message + offset) >= '0') && (*(Client_Message + offset) <= '9')){
-//                 sprintf(buffer, "%c", *(Client_Message + offset));
-//                 strcat(pid_num_string, buffer);
-//                 offset ++;
-//                 count ++;
-//             }
-//             else{
-//                 break;
-//             }
-//         }
-//         /* Filter spaces in messages */
-//         while(*(Client_Message + offset) == ' '){
-//             offset += 1;
-//         }
-//         // printf("pid_num_string is : %s\n", pid_num_string);
-//         pid_num = atoi(pid_num_string);
-//         printf("Private send to client_%d\n", pid_num);
-//         printf("Private Message : %s\n", (Client_Message + offset));
-
-//         /* Intercept valid data of private messages */
-//         strcpy(Client_to_Server.message, (Client_Message + offset));
-//     }
-//     else{
-//         printf("Send mseeage to all clients\n");
-//         pid_num = -1;
-//     }
-//     Client_to_Server.private_pid = pid_num;
-
-// }
-
 void Private_Chat_Filter_By_Name(char* Client_Message){
 
     int offset;
@@ -237,6 +196,8 @@ void Private_Chat_Filter_By_Name(char* Client_Message){
     char client_name_buffer[MAX_CLIENT_NAME_LEN] = {0};
 
     if(strncmp(Client_Message, PRIVATE_MSG_HEADER, strlen(PRIVATE_MSG_HEADER)) == 0){
+        
+        printf("\n");
         offset = strlen(PRIVATE_MSG_HEADER);
         /* Filter spaces of client pid */
         while(*(Client_Message + offset) == ' '){
@@ -255,8 +216,17 @@ void Private_Chat_Filter_By_Name(char* Client_Message){
         strcpy(Client_to_Server.target_name, client_name_buffer);
     }
     else{
-        printf("BROADCAST_TO_ALL\n");
+        //printf("BROADCAST_TO_ALL\n");
         strcpy(Client_to_Server.target_name, BROADCAST_TO_ALL);
         strcpy(Client_to_Server.message, Client_Message);
     }
+}
+
+void Show_Local_Time(void){
+    time_t tmpcal_ptr;
+	struct tm *tmp_ptr = NULL;
+    time(&tmpcal_ptr);
+    tmp_ptr = localtime(&tmpcal_ptr);
+	printf ("%d-%02d-%02d ", (1900+tmp_ptr->tm_year), (1+tmp_ptr->tm_mon), tmp_ptr->tm_mday);
+	printf("%02d:%02d:%02d 👇\n", tmp_ptr->tm_hour, tmp_ptr->tm_min, tmp_ptr->tm_sec);
 }

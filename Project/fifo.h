@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <signal.h>
+#include <time.h>
 
 #define PUBLIC_FIFO "Server_FIFO"
 #define PRIVATE_FIFO "Client_FIFO_"
@@ -32,7 +33,6 @@ struct FIFO_Data{
     int client_pid;
     char client_name[MAX_CLIENT_NAME_LEN];
     char target_name[MAX_CLIENT_NAME_LEN];
-    // int private_pid;
     char message[100];
 };
 
@@ -43,11 +43,10 @@ void Store_Private_FIFO_Name(void);
 void Server_Send_Message(void);
 void Client_Write_Data(int Process, int Child_PID);
 void Client_Read_Data(void);
-// void Private_Chat_Filter(char* Client_Message);
 void Private_Chat_Filter_By_Name(char* Client_Message);
-// void Store_Client_Name(void);
+void Show_Local_Time(void);
 
-// int New_Client_Flag;
+int New_Client_Flag;
 int Client_Number;
 int Client_PID_Box[MAX_Client_Number];
 char Client_Name_Box[MAX_Client_Number][MAX_CLIENT_NAME_LEN];

@@ -17,7 +17,7 @@
 
 int main(){
 
-    Client_Number = 0;
+    Client_Number = 0;    
     // New_Client_Flag = 0;
 
     /* Bind the SIGINT signal */
@@ -47,7 +47,7 @@ int main(){
             /* Create the private FIFO for a new client */
             if(strcmp(Client_to_Server.message, IS_NEW_CLIENT) == 0){
                 printf("This is a new client!\n");
-                // New_Client_Flag = 1;
+                New_Client_Flag = 1;
                 Create_FIFO(Private_FIFO_Name);
                 Store_Private_FIFO_Name();
             }
