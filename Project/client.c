@@ -1,11 +1,13 @@
 /********************************************************************
 *   File Name: client.c
+*   Function: Implemented group chat and private chat functions.
 *   Description: \
 *   This program passes the client's pid to the server, \
 *   writes data to the server with the public FIFO, \
 *   and reads data from server with the private FIFO.
 *   Author: Zhang Houjin
-*   Date: 2020/04/06
+*   Init Date: 2020/04/06
+*   Modified Date: 2020/04/11
 *********************************************************************/
 
 #include "fifo.h"
@@ -36,6 +38,8 @@ int main(){
         printf("Fail to call fork()\n");
         exit(1);
     }
+
+    /* Parent process sends data */
     else if(pid > 0){
         while(1){
             // printf("Please input message: ");
@@ -45,6 +49,8 @@ int main(){
             Client_Write_Data(IS_PARENT, pid);
         }
     }
+
+    /* Child process receives data */
     else{
         while(1){
             /* Read server struct data */

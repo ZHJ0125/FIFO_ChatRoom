@@ -3,7 +3,8 @@
 *   Description: Contains variable definitions and declarations
 *   Others: Header file used by server.c client.c fifo.c
 *   Author: Zhang Houjin
-*   Date: 2020/04/06
+*   Init Date: 2020/04/06
+*   Modified Date: 2020/04/11
 *********************************************************************/
 
 #ifndef __MYFIFO__
@@ -26,8 +27,8 @@
 #define BROADCAST_TO_ALL "Broadcast"
 #define PRIVATE_MSG_HEADER "to:"
 #define MAX_Client_Number 5
-#define IS_PARENT 1
 #define MAX_CLIENT_NAME_LEN 30
+#define IS_PARENT 1
 
 struct FIFO_Data{
     int client_pid;

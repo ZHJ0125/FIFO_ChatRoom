@@ -1,5 +1,6 @@
 /********************************************************************
 *   File Name: server.c
+*   Function: Implemented group chat and private chat functions.
 *   Description: \
 *   1. Bind the SIGINT signal.
 *   2. Create a public FIFO and open it with read-only mode.
@@ -10,7 +11,8 @@
 *   7. If "quit" is read from the client,\
 *      close the private FIFO and end the session.
 *   Author: Zhang Houjin
-*   Date: 2020/04/06
+*   Init Date: 2020/04/06
+*   Modified Date: 2020/04/11
 *********************************************************************/
 
 #include "fifo.h"
@@ -72,4 +74,5 @@ int main(){
     }
     
     return 0;
+
 }
