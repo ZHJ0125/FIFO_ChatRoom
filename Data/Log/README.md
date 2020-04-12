@@ -21,3 +21,11 @@
 1. 实现了使用用户名标识的私聊功能
 2. 优化了客户端显示的内容
 3. 录制了测试视频并投稿至B站
+
+## Day3
+
+具体内容请看： [Day3.md](/Data/Log/Day3.md)
+
+1. 测试视频已在 [B站审核已通过](https://www.bilibili.com/video/BV1Pi4y187co/)
+2. 编写阶段性成果文章并 [发布在CSDN](https://blog.csdn.net/ZHJ123CSDN/article/details/105449547)
+3. 尝试使用QT编写界面
