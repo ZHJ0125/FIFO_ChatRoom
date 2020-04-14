@@ -3,7 +3,7 @@
 *   Description: This program contains API interface for FIFO function.
 *   Author: Zhang Houjin
 *   Init Date: 2020/04/06
-*   Modified Date: 2020/04/11
+*   Modified Date: 2020/04/14
 *********************************************************************/
 
 #include "fifo.h"
@@ -58,8 +58,9 @@ char* Get_Private_FIFO_Name(int Client_PID){
 *   Input: int num -> Signal value
 *   Author: Zhang Houjin
 *   Date: 2020/04/05
+*   Modified Date: 2020/04/14
 *********************************************************************/
-void sigcatch(int num){
+void Server_Sigcatch(int num){
 
     printf("\nServer is exiting...\n");
     unlink(PUBLIC_FIFO);
@@ -93,6 +94,7 @@ void Store_Private_FIFO_Name(void){
 *   Input: void
 *   Author: Zhang Houjin
 *   Date: 2020/04/11
+*   Modified Date: 2020/04/14
 *********************************************************************/
 void Server_Send_Message(void){
 
@@ -136,6 +138,11 @@ void Server_Send_Message(void){
         /* Filter message content */
         if(New_Client_Flag){
             sprintf(Server_to_Client.message, "👦 [%s] 进入聊天室 \n", Client_to_Server.client_name);
+            New_Client_Flag = 0;
+        }
+        else if(Quit_Flag){
+            sprintf(Server_to_Client.message, "💀 [%s] 退出了聊天室 \n", Client_to_Server.client_name);
+            Quit_Flag = 0;
         }
         else{
             sprintf(Server_to_Client.message, "[%s] said: ", Client_to_Server.client_name);
@@ -157,7 +164,6 @@ void Server_Send_Message(void){
             }
             usleep(100000);
         }
-        New_Client_Flag = 0;
     }
     
     printf("\n");
@@ -300,5 +306,30 @@ void Show_Local_Time(void){
     tmp_ptr = localtime(&tmpcal_ptr);
 	printf ("%d-%02d-%02d ", (1900+tmp_ptr->tm_year), (1+tmp_ptr->tm_mon), tmp_ptr->tm_mday);
 	printf("%02d:%02d:%02d 👇\n", tmp_ptr->tm_hour, tmp_ptr->tm_min, tmp_ptr->tm_sec);
+
+}
+
+/********************************************************************
+*   Function Name: void Delete_Client_Data(void)
+*   Description: Delete Information of exited client.
+*   Called By: server.c[main]
+*   Input: void
+*   Author: Zhang Houjin
+*   Date: 2020/04/14
+*********************************************************************/
+void Delete_Client_Data(void){
+
+    int local;
+    int count;
+
+    for(local = 0; local < Client_Number; local++){
+        if(Client_to_Server.client_pid == Client_PID_Box[local]){
+            break;
+        }
+    }
+    for(count = local; count < Client_Number; count ++){
+        Client_PID_Box[count] = Client_PID_Box[count + 1];
+        strcpy(Client_Name_Box[count], Client_Name_Box[count + 1]);
+    }
 
 }

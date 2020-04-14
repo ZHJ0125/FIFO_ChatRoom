@@ -4,7 +4,7 @@
 *   Others: Header file used by server.c client.c fifo.c
 *   Author: Zhang Houjin
 *   Init Date: 2020/04/06
-*   Modified Date: 2020/04/11
+*   Modified Date: 2020/04/14
 *********************************************************************/
 
 #ifndef __MYFIFO__
@@ -37,7 +37,7 @@ struct FIFO_Data{
     char message[100];
 };
 
-void sigcatch(int signum);
+void Server_Sigcatch(int signum);
 void Create_FIFO(char *FIFO_Name);
 char* Get_Private_FIFO_Name(int Client_PID);
 void Store_Private_FIFO_Name(void);
@@ -46,8 +46,10 @@ void Client_Write_Data(int Process, int Child_PID);
 void Client_Read_Data(void);
 void Private_Chat_Filter_By_Name(char* Client_Message);
 void Show_Local_Time(void);
+void Delete_Client_Data(void);
 
 int New_Client_Flag;
+int Quit_Flag;
 int Client_Number;
 int Client_PID_Box[MAX_Client_Number];
 char Client_Name_Box[MAX_Client_Number][MAX_CLIENT_NAME_LEN];

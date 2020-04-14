@@ -12,18 +12,19 @@
 *      close the private FIFO and end the session.
 *   Author: Zhang Houjin
 *   Init Date: 2020/04/06
-*   Modified Date: 2020/04/11
+*   Modified Date: 2020/04/14
 *********************************************************************/
 
 #include "fifo.h"
 
 int main(){
 
-    Client_Number = 0;    
+    Client_Number = 0;
+    Quit_Flag = 0;
     // New_Client_Flag = 0;
 
     /* Bind the SIGINT signal */
-    if(signal(SIGINT, &sigcatch) == SIG_ERR){
+    if(signal(SIGINT, &Server_Sigcatch) == SIG_ERR){
         printf("Couldn't register signal handler\n");
         exit(1);
     }
@@ -37,7 +38,6 @@ int main(){
             printf("Fail to open PUBLIC_FIFO\n");
             exit(1);
         }
-        //printf("PUBLIC_FIFO has been opened\n");
 
         /* Read the strcut data of the public FIFO */
         if(read(PublicFd, &Client_to_Server, sizeof(struct FIFO_Data)) > 0){
@@ -57,14 +57,16 @@ int main(){
             /* If the client exits, cut off communication */
             if(strcmp(Client_to_Server.message, CLIENT_QUIT) == 0){
                 unlink(Private_FIFO_Name);
+                Delete_Client_Data();
                 Client_Number --;
-                printf("Closed Client_%d Private FIFO\n\n", Client_to_Server.client_pid);
-                printf("Client Number is : %d\n", Client_Number);
+                Quit_Flag = 1;
+                printf("Closed Client_%d Private FIFO\n", Client_to_Server.client_pid);
+                printf("Client Number is : %d\n\n", Client_Number);
             }
-            else{
-                /* Server send a reply message to the client */
-                Server_Send_Message();
-            }
+            
+            /* Server send a reply message to the client */
+            Server_Send_Message();
+            
             
         }
         else{

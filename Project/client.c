@@ -7,7 +7,7 @@
 *   and reads data from server with the private FIFO.
 *   Author: Zhang Houjin
 *   Init Date: 2020/04/06
-*   Modified Date: 2020/04/11
+*   Modified Date: 2020/04/14
 *********************************************************************/
 
 #include "fifo.h"
@@ -17,7 +17,7 @@ int main(){
     pid_t pid;
 
     /* Initial handshake message */
-    printf("Please input your name: ");
+    printf("\n🎉 欢迎来到FIFO聊天室 🎉\n\n请输入您的用户名: ");
     scanf("%s", Client_to_Server.client_name);
     getchar();
     Client_to_Server.client_pid = getpid();
