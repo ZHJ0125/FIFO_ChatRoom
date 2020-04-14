@@ -26,7 +26,7 @@
 #define CLIENT_QUIT "quit\n"
 #define BROADCAST_TO_ALL "Broadcast"
 #define PRIVATE_MSG_HEADER "to:"
-#define MAX_Client_Number 5
+#define MAX_Client_Number 6
 #define MAX_CLIENT_NAME_LEN 30
 #define IS_PARENT 1
 
