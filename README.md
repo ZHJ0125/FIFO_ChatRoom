@@ -42,8 +42,7 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 
 ### Day0
 
-具体内容请看： [Day0.md](/Data/Log/Day0.md)
-
+* 具体内容请看： [Day0.md](/Data/Log/Day0.md)
 * 编写项目需求、可行性分析和技术分析
 * 上传命名管道的基础代码 -> 基础代码来自 [Embedded_Linux仓库](https://github.com/ZHJ0125/Embedded_Linux/tree/master/Homework/lesson11)
 
