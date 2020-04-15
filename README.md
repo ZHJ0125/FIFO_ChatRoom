@@ -32,9 +32,18 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 
 ## 效果展示
 
-[![效果展示截图](/Data/Image/Video_Show.png)](https://www.bilibili.com/video/BV1Pi4y187co/)
+> 目前已录制了两个视频，分别是[Linux_命名管道_聊天室_测试视频](https://www.bilibili.com/video/BV1Pi4y187co/)和[Linux_命名管道_聊天室_测试视频_V2.0](https://www.bilibili.com/video/BV1254y197AU/)
 
-* 点击前往B站，观看 **[BiliBili - Linux_命名管道_聊天室_测试视频](https://www.bilibili.com/video/BV1Pi4y187co/)**
+[![V2.0效果展示截图](/Data/Image/Video_Show_V2.png)](https://www.bilibili.com/video/BV1Pi4y187co/)
+
+* 点击观看 **[BiliBili - Linux_命名管道_聊天室_测试视频_V2.0版本](https://www.bilibili.com/video/BV1254y197AU/)**
+   * 修复了V1.0版本退出程序的bug
+   * 实现了在某个客户端退出后，服务器向其他用户发送通知的功能
+   * 优化了客户端界面
+
+* 点击观看 **[BiliBili - Linux_命名管道_聊天室_测试视频_V1.0版本](https://www.bilibili.com/video/BV1Pi4y187co/)**
+   * 实现了群聊功能
+   * 实现了以用户名为标识的私聊功能
 
 ## 项目日志
 
