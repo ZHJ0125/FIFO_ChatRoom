@@ -1,7 +1,17 @@
 # FIFO_ChatRoom
 Linux 使用命名管道实现聊天室功能
 
-## 功能说明
+## 根目录文件说明
+
+|文件(夹)名称|用途|
+|---|---|
+|.vscode|我的VSCode配置信息|
+|Data|用于存放项目资料，包括图片和日志文件|
+|Project|用于存放项目源代码|
+|LICENSE|项目开源许可证|
+|README.md|项目自述文件|
+
+## 程序功能说明
 
 - [x] 实现了多客户端的群聊功能
 - [x] 实现了客户端双方的私聊功能
@@ -97,6 +107,6 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 
 > 源代码遵循 [GNU General Public License v3.0](https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/LICENSE) 开源许可协议
 
-* Gitee 仓库地址 **（推荐）** ： [https://gitee.com/zhj0125/FIFO_ChatRoom/tree/master/Project](https://gitee.com/zhj0125/FIFO_ChatRoom/tree/master/Project)
-* GitHub 仓库地址： [https://github.com/ZHJ0125/FIFO_ChatRoom/tree/master/Project](https://github.com/ZHJ0125/FIFO_ChatRoom/tree/master/Project)
-* 如果您对代码有任何疑问或修改意见，欢迎 [提出issue](https://gitee.com/zhj0125/Embedded_Linux/issues) 或者直接私信我，谢谢。
+* Gitee 仓库地址 **（推荐）** ： [https://gitee.com/zhj0125/FIFO_ChatRoom](https://gitee.com/zhj0125/FIFO_ChatRoom/)
+* GitHub 仓库地址： [https://github.com/ZHJ0125/FIFO_ChatRoom](https://github.com/ZHJ0125/FIFO_ChatRoom/)
+* 如果您对代码有任何疑问或修改意见，欢迎 [提出issue](https://gitee.com/zhj0125/FIFO_ChatRoom/issues) 或者直接私信我，谢谢。
