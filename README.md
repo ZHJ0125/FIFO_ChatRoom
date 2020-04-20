@@ -103,6 +103,14 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 * 实现了在某个客户端退出后，服务器向其他用户发送通知的功能
 * 将新版本内容录制为测试视频并投稿至B站
 
+## Day7--Day11 (2020/04/15--2020/04/19)
+
+* Do Nothing
+
+## Day12 (2020/04/20)
+
+* 编写说明文档
+
 ## 程序代码
 
 > 源代码遵循 [GNU General Public License v3.0](https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/LICENSE) 开源许可协议
