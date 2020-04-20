@@ -1,5 +1,8 @@
 # FIFO_ChatRoom
-Linux 使用命名管道实现聊天室功能
+
+> Linux 使用命名管道实现聊天室功能
+
+✔ 建议您首先前往本项目的[说明文档](http://zhj0125.gitee.io/fifo_chatroom/)页面，查看详细的项目说明
 
 ## 根目录文件说明
 
@@ -7,6 +10,7 @@ Linux 使用命名管道实现聊天室功能
 |---|---|
 |.vscode|我的VSCode配置信息|
 |Data|用于存放项目资料，包括图片和日志文件|
+|Docs|用于存放说明文档网页的源代码|
 |Project|用于存放项目源代码|
 |LICENSE|项目开源许可证|
 |README.md|项目自述文件|
@@ -103,13 +107,13 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 * 实现了在某个客户端退出后，服务器向其他用户发送通知的功能
 * 将新版本内容录制为测试视频并投稿至B站
 
-## Day7--Day11 (2020/04/15--2020/04/19)
+### Day7--Day11 (2020/04/15--2020/04/19)
 
 * Do Nothing
 
-## Day12 (2020/04/20)
+### Day12 (2020/04/20)
 
-* 编写说明文档
+* 编写[说明文档](http://zhj0125.gitee.io/fifo_chatroom/)
 
 ## 程序代码
 
