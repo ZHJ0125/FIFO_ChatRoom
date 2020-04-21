@@ -31,15 +31,18 @@
 
 * 点击观看 [BiliBili - Linux_命名管道_聊天室_V2.0版本_测试视频](https://www.bilibili.com/video/BV1254y197AU/)
 
-[![测试视频](Video_Show_V2.png)](https://www.bilibili.com/video/BV1254y197AU/)
+[![测试视频](img/Video_Show_V2.png)](https://www.bilibili.com/video/BV1254y197AU/)
 
 ---
+
 > 目前已录制了两支视频，分别是`Linux_命名管道_聊天室_测试视频`和`Linux_命名管道_聊天室_测试视频_V2.0`
 
 * 点击观看 **[BiliBili - Linux_命名管道_聊天室_测试视频_V2.0版本](https://www.bilibili.com/video/BV1254y197AU/)**
    * 修复了V1.0版本退出程序的bug
    * 实现了在某个客户端退出后，服务器向其他用户发送通知的功能
    * 优化了客户端界面
+
+---
 
 * 点击观看 **[BiliBili - Linux_命名管道_聊天室_测试视频_V1.0版本](https://www.bilibili.com/video/BV1Pi4y187co/)**
    * 实现了群聊功能

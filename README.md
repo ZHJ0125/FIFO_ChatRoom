@@ -10,7 +10,7 @@
 |---|---|
 |.vscode|我的VSCode配置信息|
 |Data|用于存放项目资料，包括图片和日志文件|
-|Docs|用于存放说明文档网页的源代码|
+|MkDocs|用于存放说明文档网页的源代码|
 |Project|用于存放项目源代码|
 |LICENSE|项目开源许可证|
 |README.md|项目自述文件|
@@ -114,6 +114,10 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 ### Day12 (2020/04/20)
 
 * 编写[说明文档](http://zhj0125.gitee.io/fifo_chatroom/)
+
+### Day13 (2020/04/21)
+
+* 将说明文档框架，由`docsify`转为`MkDocs`
 
 ## 程序代码
 

@@ -1,0 +1,16 @@
+site_name: FIFO_ChatRoom
+pages:
+- 主页: 'index.md'
+- 项目概述: '01_Overview.md'
+- 关键问题: '02_KeyPoint.md'
+- 流程分析: '03_Analysis.md'
+- 测试说明: '04_Instructions.md'
+- 项目日志: '05_Log.md'
+- 项目源代码: '06_SourceCode.md'
+theme: readthedocs
+repo_url: 'https://github.com/ZHJ0125/FIFO_ChatRoom'
+repo_name: 'FIFO_ChatRoom'
+site_description: 'Linux 命名管道聊天室 说明文档'
+site_author: 'Zhang Houjin'
+site_favicon: 'img/favicon_16.ico'
+copyright: '@ZhangHoujin'

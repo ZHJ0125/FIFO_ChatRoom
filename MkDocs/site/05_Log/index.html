@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Zhang Houjin">
+  <link rel="shortcut icon" href="../img/favicon_16.ico">
+  
+  <title>项目日志 - FIFO_ChatRoom</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u9879\u76ee\u65e5\u5fd7";
+    var mkdocs_page_input_path = "05_Log.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> FIFO_ChatRoom</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">主页</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../01_Overview/">项目概述</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../02_KeyPoint/">关键问题</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../03_Analysis/">流程分析</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../04_Instructions/">测试说明</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">项目日志</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#fifo_chatroom">FIFO_ChatRoom 项目日志</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#day0-20200408">Day0 (2020/04/08)</a></li>
+        
+            <li><a class="toctree-l3" href="#day1-20200409">Day1 (2020/04/09)</a></li>
+        
+            <li><a class="toctree-l3" href="#day2-20200410">Day2 (2020/04/10)</a></li>
+        
+            <li><a class="toctree-l3" href="#day3-20200411">Day3 (2020/04/11)</a></li>
+        
+            <li><a class="toctree-l3" href="#day4-20200412">Day4 (2020/04/12)</a></li>
+        
+            <li><a class="toctree-l3" href="#day5-20200413">Day5 (2020/04/13)</a></li>
+        
+            <li><a class="toctree-l3" href="#day6-20200414">Day6 (2020/04/14)</a></li>
+        
+            <li><a class="toctree-l3" href="#day7-day11-20200415-20200419">Day7--Day11 (2020/04/15--2020/04/19)</a></li>
+        
+            <li><a class="toctree-l3" href="#day12-20200420">Day12 (2020/04/20)</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../06_SourceCode/">项目源代码</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">FIFO_ChatRoom</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>项目日志</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ZHJ0125/FIFO_ChatRoom/edit/master/docs/05_Log.md"> Edit on FIFO_ChatRoom</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="fifo_chatroom">FIFO_ChatRoom 项目日志</h1>
+<h2 id="day0-20200408">Day0 (2020/04/08)</h2>
+<p>具体内容请看： <a href="https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/Data/Log/Day0.md">Day0.md</a></p>
+<ul>
+<li>编写项目需求、可行性分析和技术分析</li>
+<li>上传命名管道的基础代码 -&gt; 代码来自<a href="https://github.com/ZHJ0125/Embedded_Linux/tree/master/Homework/lesson11">Embedded_Linux仓库</a></li>
+</ul>
+<hr />
+<h2 id="day1-20200409">Day1 (2020/04/09)</h2>
+<p>具体内容请看： <a href="https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/Data/Log/Day1.md">Day1.md</a></p>
+<ul>
+<li>客户端之间的<strong>群聊功能</strong>已经实现</li>
+<li>客户端之间的<strong>私聊功能</strong>已经实现</li>
+</ul>
+<hr />
+<h2 id="day2-20200410">Day2 (2020/04/10)</h2>
+<p>具体内容请看： <a href="https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/Data/Log/Day2.md">Day2.md</a></p>
+<ol>
+<li>实现了使用用户名标识的私聊功能</li>
+<li>优化了客户端显示的内容</li>
+<li>录制了测试视频并投稿至B站</li>
+</ol>
+<hr />
+<h2 id="day3-20200411">Day3 (2020/04/11)</h2>
+<p>具体内容请看： <a href="https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/Data/Log/Day3.md">Day3.md</a></p>
+<ol>
+<li>测试视频已在 <a href="https://www.bilibili.com/video/BV1Pi4y187co/">B站审核已通过</a></li>
+<li>编写阶段性成果文章并 <a href="https://blog.csdn.net/ZHJ123CSDN/article/details/105449547">发布在CSDN</a></li>
+<li>尝试使用QT编写界面</li>
+</ol>
+<hr />
+<h2 id="day4-20200412">Day4 (2020/04/12)</h2>
+<p>具体内容请看： <a href="https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/Data/Log/Day4.md">Day4.md</a></p>
+<ul>
+<li>NULL</li>
+</ul>
+<hr />
+<h2 id="day5-20200413">Day5 (2020/04/13)</h2>
+<p>具体内容请看： <a href="https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/Data/Log/Day5.md">Day5.md</a></p>
+<ol>
+<li>安装 Qt for Linux</li>
+<li>发现关于QT的严重问题</li>
+</ol>
+<hr />
+<h2 id="day6-20200414">Day6 (2020/04/14)</h2>
+<p>具体内容请看： <a href="https://gitee.com/zhj0125/FIFO_ChatRoom/blob/master/Data/Log/Day6.md">Day6.md</a></p>
+<ol>
+<li>修复退出程序的bug</li>
+<li>实现了在某个客户端退出后，服务器向其他用户发送通知的功能</li>
+<li>将新版本内容录制为测试视频并投稿至B站</li>
+</ol>
+<hr />
+<h2 id="day7-day11-20200415-20200419">Day7--Day11 (2020/04/15--2020/04/19)</h2>
+<ul>
+<li>Do Nothing</li>
+</ul>
+<hr />
+<h2 id="day12-20200420">Day12 (2020/04/20)</h2>
+<ul>
+<li>编写说明文档</li>
+</ul>
+<hr />
+<h3 id="day13-20200421">Day13 (2020/04/21)</h3>
+<ul>
+<li>将说明文档的框架，由<code>docsify</code>转为<code>MkDocs</code></li>
+</ul>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../06_SourceCode/" class="btn btn-neutral float-right" title="项目源代码">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../04_Instructions/" class="btn btn-neutral" title="测试说明"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>@ZhangHoujin</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../04_Instructions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../06_SourceCode/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
