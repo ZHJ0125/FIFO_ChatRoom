@@ -48,7 +48,7 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 
 > 目前已录制了两个视频，分别是[Linux_命名管道_聊天室_测试视频](https://www.bilibili.com/video/BV1Pi4y187co/)和[Linux_命名管道_聊天室_测试视频_V2.0](https://www.bilibili.com/video/BV1254y197AU/)
 
-[![V2.0效果展示截图](/Data/Image/Video_Show_V2.png)](https://www.bilibili.com/video/BV1Pi4y187co/)
+[![V2.0效果展示截图](Data/Image/Video_Show_V2.png)](https://www.bilibili.com/video/BV1254y197AU/)
 
 * 点击观看 **[BiliBili - Linux_命名管道_聊天室_测试视频_V2.0版本](https://www.bilibili.com/video/BV1254y197AU/)**
    * 修复了V1.0版本退出程序的bug
