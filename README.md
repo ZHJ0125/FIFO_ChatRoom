@@ -64,7 +64,7 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 > 详细内容请看：[LOG](/Data/Log/README.md)
 
 <details>
-<summary>点击查看</summary>
+<summary>展开查看</summary>
 
 ### Day0
 
