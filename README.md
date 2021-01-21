@@ -63,6 +63,9 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 
 > 详细内容请看：[LOG](/Data/Log/README.md)
 
+<details>
+<summary>点击查看</summary>
+
 ### Day0
 
 * 具体内容请看： [Day0.md](/Data/Log/Day0.md)
@@ -118,6 +121,8 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 ### Day13 (2020/04/21)
 
 * 将说明文档框架，由`docsify`转为`MkDocs`
+
+</details>
 
 ## 程序代码
 
