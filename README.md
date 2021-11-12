@@ -25,6 +25,7 @@
 
 ## 编译和测试说明
 
+* 使用 git 克隆本项目
 * 使用 make 实现客户端和服务器的编译
 * server 是服务器程序
 * client 是客户端程序
@@ -32,6 +33,8 @@
 * 客户端的私聊格式为 `to: [Target_Client_Name] [Message_To_Be_Sent]`
 
 > 程序编译示例
+
+> ！以下示例仅供参考，具体请看[说明文档](https://zhj0125.gitee.io/fifo_chatroom/04_Instructions/)相关章节以及演示视频
 ```bash
 zhj@thinkpad-vmware:~/FIFO_ChatRoom/Project$ ls
 client.c  fifo.c  fifo.h  Makefile  server.c
@@ -121,6 +124,10 @@ client  client.c  fifo.c  fifo.h  Makefile  server  server.c
 ### Day13 (2020/04/21)
 
 * 将说明文档框架，由`docsify`转为`MkDocs`
+
+### 2021-11-12
+
+* 更新说明文档-[操作说明](https://zhj0125.gitee.io/fifo_chatroom/04_Instructions/#_1)章节
 
 </details>
 
